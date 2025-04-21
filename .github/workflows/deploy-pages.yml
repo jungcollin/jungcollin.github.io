@@ -34,7 +34,7 @@ jobs:
       # 2. Jekyll 실행을 위한 Ruby 환경 설정
       # GitHub Pages는 Jekyll을 Ruby 기반으로 실행합니다.
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1' # Jekyll이 일반적으로 요구하는 Ruby 버전 (필요시 변경)
           bundler-cache: true # Gemfile.lock 파일이 있으면 종속성 자동 설치
