@@ -1,0 +1,24 @@
+steps:
+  - name: Checkout # Repository 코드 체크아웃
+    uses: actions/checkout@v4
+    with:
+      fetch-depth: 0
+  
+  - name: Setup Ruby # Jekyll 실행을 위한 Ruby 환경 설정
+    uses: actions/setup-ruby@v1
+    with:
+      ruby-version: '3.1' # GitHub Actions 환경에 설치된 Ruby 버전 확인 또는 명시
+      bundler-cache: true # Gemfile.lock 파일 기반으로 종속성 설치
+  
+  - name: Install Jekyll and Dependencies # Jekyll 및 Gemfile에 명시된 플러그인 설치
+    run: bundle install
+  
+  - name: Jekyll Build # Jekyll 빌드 실행
+    run: bundle exec jekyll build
+    env:
+      JEKYLL_ENV: production # Jekyll 환경 변수 설정 (production으로 설정 시 일부 플러그인 동작 방식 달라짐)
+  
+  - name: Upload artifact # 빌드 결과물 (기본값은 _site 폴더) 업로드
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: _site # Jekyll 빌드 결과물이 생성되는 폴더
